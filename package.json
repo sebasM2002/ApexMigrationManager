@@ -1,0 +1,96 @@
+{
+  "name": "apexmigrationmanager",
+  "displayName": "ApexMigrationManager",
+  "description": "Extension para crear migraciones de aplicaciones Apex utilizando Liquidbase",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.91.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "apexmigrationmanager.createMigration",
+        "title": "Create Liquibase Migration"
+      },
+      {
+        "command": "apexmigrationmanager.detectChanges",
+        "title": "Detect Changes and Create Migration"
+      }
+    ]
+  },
+  "menus": {
+      "editor/title": [
+        {
+          "command": "apexmigrationmanager.createMigration",
+          "group": "navigation",
+          "when": "editorLangId == sql"
+        },
+        {
+          "command": "apexmigrationmanager.detectChanges",
+          "group": "navigation",
+          "when": "editorLangId == sql"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "apexmigrationmanager.createMigration",
+          "when": "editorLangId == sql"
+        },
+        {
+          "command": "apexmigrationmanager.detectChanges",
+          "when": "editorLangId == sql"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "apexmigrationmanager.createMigration",
+          "group": "navigation",
+          "when": "view == explorer"
+        },
+        {
+          "command": "apexmigrationmanager.detectChanges",
+          "group": "navigation",
+          "when": "view == explorer"
+        }
+      ]
+    },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.7",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.91.0",
+    "@typescript-eslint/eslint-plugin": "^7.14.1",
+    "@typescript-eslint/parser": "^7.11.0",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.4.0",
+    "esbuild": "^0.21.5",
+    "eslint": "^8.57.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "simple-git": "^3.25.0",
+    "@types/node": "^14.14.31",
+    "@types/vscode": "^1.91.0",
+    "typescript": "^4.1.3",
+    "eslint": "^7.22.0",
+    "vscode-test": "^1.4.0"
+  }
+}
