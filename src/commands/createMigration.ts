@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import * as os from 'os';
 import * as fs from 'fs';
 import * as path from 'path';
 import { getLastSequence } from '../utils/sequenceUtils';
@@ -24,17 +25,7 @@ export async function createMigration() {
         return;
     }
 
-    const employeeNumber = await vscode.window.showInputBox({
-        prompt: 'Enter your employee number',
-        placeHolder: 'Employee Number'
-    });
-
-    if (!employeeNumber) {
-        vscode.window.showErrorMessage('Employee number is required.');
-        return;
-    }
-
-    const username = process.env['USERNAME'] || process.env['USER'] || 'unknown_user';
+    const username = process.env['USERNAME'] || process.env['USER'] || os.userInfo().username;
 
     // Leer el archivo project.json
     const projectFilePath = path.join(workspacePath, 'project.json');
@@ -45,6 +36,17 @@ export async function createMigration() {
         projectName = projectJson.code || 'PROJECT';
     } catch (error) {
         vscode.window.showErrorMessage(`Error reading project.json: ${error}`);
+    }
+    //Confirmacion de los datos
+    const confirm = await vscode.window.showInformationMessage(
+        `Please confirm the details:\n\nAxosoft Case Number: ${axosoftCaseNumber}\nEmployee Number: ${username}\nProject: ${projectName}`,
+    { modal: true },
+        'Confirm'
+    );
+
+    if (confirm !== 'Confirm') {
+        vscode.window.showInformationMessage('Migration creation cancelled');
+        return;
     }
 
     const installMigrationsPath = path.join(workspacePath, 'migrations', 'install');
@@ -62,7 +64,8 @@ export async function createMigration() {
 
     fs.writeFileSync(installFilePath, `-- New migration script for ${installFileName}\n`);
     fs.writeFileSync(rollbackFilePath, `-- Rollback script for ${installFileName}\n`);
-    updateChangelog(workspacePath, axosoftCaseNumber, installFileName, rollbackFileName);  
+
+    updateChangelog(workspacePath,axosoftCaseNumber, installFileName, rollbackFileName);  
 
     vscode.window.showInformationMessage(`Created new migration scripts:\n- ${installFileName}\n- ${rollbackFileName}`);
 }

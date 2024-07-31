@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import * as os from 'os';
 import * as fs from 'fs';
 import * as path from 'path';
 import { exec } from 'child_process';
@@ -38,17 +39,7 @@ export async function detectChanges() {
             return;
         }
 
-        const employeeNumber = await vscode.window.showInputBox({
-            prompt: 'Enter your employee number',
-            placeHolder: 'Employee Number'
-        });
-
-        if (!employeeNumber) {
-            vscode.window.showErrorMessage('Employee number is required.');
-            return;
-        }
-
-        const username = process.env['USERNAME'] || process.env['USER'] || 'unknown_user';
+        const username = process.env['USERNAME'] || process.env['USER'] || os.userInfo().username;
 
         // Leer el archivo project.json
         const projectFilePath = path.join(workspacePath, 'project.json');
@@ -61,6 +52,17 @@ export async function detectChanges() {
             vscode.window.showErrorMessage(`Error reading project.json: ${error}`);
         }
 
+        //Confirmacion de los datos
+        const confirm = await vscode.window.showInformationMessage(
+        `Please confirm the details:\n\nAxosoft Case Number: ${axosoftCaseNumber}\nEmployee Number: ${username}\nProject: ${projectName}`,
+        { modal: true },
+            'Confirm'
+        );
+
+        if (confirm !== 'Confirm') {
+            vscode.window.showInformationMessage('Migration creation cancelled');
+            return;
+        }
         const migrationsPath = path.join(workspacePath, 'migrations', 'install');
         const rollbackPath = path.join(workspacePath, 'migrations', 'rollback');
         const changelogPath = path.join(workspacePath, 'migrations', 'changelogs', 'changelog.xml');
