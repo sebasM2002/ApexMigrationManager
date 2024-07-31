@@ -19,14 +19,6 @@
       {
         "command": "apexmigrationmanager.detectChanges",
         "title": "Detect Changes and Create Migration"
-      },
-      {
-        "command": "apexmigrationmanager.watchDatabase",
-        "title": "Watch for Database Changes"
-      },
-      {
-        "command": "apexmigrationmanager.createMigrationFromChanges",
-        "title": "Create Migration from Detected Changes"
       }
     ]
   },
@@ -41,16 +33,6 @@
           "command": "apexmigrationmanager.detectChanges",
           "group": "navigation",
           "when": "editorLangId == sql"
-        },
-        {
-          "command": "apexmigrationmanager.watchDatabase",
-          "group": "navigation",
-          "when": "editorLangId == sql"
-        },
-        {
-          "command": "apexmigrationmanager.createMigrationFromChanges",
-          "group": "navigation",
-          "when": "editorLangId == sql"
         }
       ],
       "commandPalette": [
@@ -60,14 +42,6 @@
         },
         {
           "command": "apexmigrationmanager.detectChanges",
-          "when": "editorLangId == sql"
-        },
-        {
-          "command": "apexmigrationmanager.watchDatabase",
-          "when": "editorLangId == sql"
-        },
-        {
-          "command": "apexmigrationmanager.createMigrationFromChanges",
           "when": "editorLangId == sql"
         }
       ],
@@ -79,16 +53,6 @@
         },
         {
           "command": "apexmigrationmanager.detectChanges",
-          "group": "navigation",
-          "when": "view == explorer"
-        },
-        {
-          "command": "apexmigrationmanager.watchDatabase",
-          "group": "navigation",
-          "when": "view == explorer"
-        },
-        {
-          "command": "apexmigrationmanager.createMigrationFromChanges",
           "group": "navigation",
           "when": "view == explorer"
         }
