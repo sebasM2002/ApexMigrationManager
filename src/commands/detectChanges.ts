@@ -72,8 +72,8 @@ export async function detectChanges() {
             const rollbackSequence = getLastSequence(rollbackPath, axosoftCaseNumber); 
             const fileContent = fs.readFileSync(path.join(workspacePath, filePath), 'utf8');
             const timestamp = new Date().toISOString().replace(/[-:.]/g, '');
-            const installFileName = `${axosoftCaseNumber}-${installSequence}-${username}-${projectName}-INSTALL.sql`;
-            const rollbackFileName = `${axosoftCaseNumber}-${rollbackSequence}-${username}-${projectName}-ROLLBACK.sql`;
+            const installFileName = `${axosoftCaseNumber}-${installSequence}-${timestamp}-${projectName}-INSTALL.sql`;
+            const rollbackFileName = `${axosoftCaseNumber}-${rollbackSequence}-${timestamp}-${projectName}-ROLLBACK.sql`;
 
             // Crear el archivo de migración
             const installFilePath = path.join(migrationsPath, installFileName);

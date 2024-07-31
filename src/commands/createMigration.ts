@@ -55,9 +55,10 @@ export async function createMigration() {
     const installSequence = getLastSequence(installMigrationsPath, axosoftCaseNumber);
     const rollbackSequence = getLastSequence(rollbackMigrationsPath, axosoftCaseNumber);
 
+    const timestamp = new Date().toISOString().replace(/[-:.]/g, '');
     // Crear archivo de migración en blanco
-    const installFileName = `${axosoftCaseNumber}-${installSequence}-${username}-${projectName}-INSTALL.sql`;
-    const rollbackFileName = `${axosoftCaseNumber}-${rollbackSequence}-${username}-${projectName}-ROLLBACK.sql`;
+    const installFileName = `${axosoftCaseNumber}-${installSequence}-${timestamp}-${projectName}-INSTALL.sql`;
+    const rollbackFileName = `${axosoftCaseNumber}-${rollbackSequence}-${timestamp}-${projectName}-ROLLBACK.sql`;
 
     const installFilePath = path.join(installMigrationsPath, installFileName);
     const rollbackFilePath = path.join(rollbackMigrationsPath, rollbackFileName);
