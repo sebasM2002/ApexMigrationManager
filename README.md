@@ -1,71 +1,41 @@
-# apexmigrationmanager README
+# APEX Migrations
 
-This is the README for your extension "apexmigrationmanager". After writing up a brief description, we recommend including the following sections.
+APEX Migrations es una extensión para Visual Studio Code que facilita la gestión de migraciones de bases de datos APEX.
 
-## Features
+## Características
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- Detecta cambios en el directorio `database`.
+- Crea scripts de migración automáticamente.
+- Gestiona scripts de instalación y rollback.
+- Actualiza automáticamente el changelog de Liquibase.
 
-For example if there is an image subfolder under your extension project workspace:
+## Uso
 
-\!\[feature X\]\(images/feature-x.png\)
+### Crear una nueva migración
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+1. Abre la paleta de comandos (`Ctrl+Shift+P` o `Cmd+Shift+P` en macOS).
+2. Ejecuta el comando `APEX Migrations: Create Migration`.
+3. Ingresa el número de caso de Axosoft.
+4. Confirma los datos suministrados.
+5. Se generará un script de migración e incluirá las modificaciones detectadas en el directorio `database`.
 
-## Requirements
+### Detectar cambios en la base de datos
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+1. Abre la paleta de comandos (`Ctrl+Shift+P` o `Cmd+Shift+P` en macOS).
+2. Ejecuta el comando `APEX Migrations: Detect Changes in Database`.
+3. Ingresa el número de caso de Axosoft.
+4. Se generará un script de migración con los cambios detectados y se actualizará el changelog de Liquibase.
 
-## Extension Settings
+## Contribuir
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+Si deseas contribuir a este proyecto, por favor sigue las siguientes instrucciones:
 
-For example:
+1. Haz un fork del repositorio.
+2. Crea una nueva rama (`git checkout -b feature/nueva-funcionalidad`).
+3. Realiza tus cambios y haz commit (`git commit -am 'Agrega nueva funcionalidad'`).
+4. Haz push a la rama (`git push origin feature/nueva-funcionalidad`).
+5. Abre un pull request.
 
-This extension contributes the following settings:
+## Licencia
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Este proyecto está licenciado bajo los términos de la licencia MIT. Consulta el archivo `LICENSE` para más información.
