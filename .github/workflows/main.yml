@@ -28,11 +28,23 @@ jobs:
         run: |
           zip -r dist.zip dist
 
-      - name: Upload dist ZIP as artifact
+      - name: Install vsce
+        run: npm install -g @vscode/vsce
+
+      - name: Build VSIX
+        run: |
+          vsce package
+          mv *.vsix apex_migrations.vsix
+      
+      - name: Upload VSIX as artifact
         uses: actions/upload-artifact@v2
         with:
-          name: dist-zip
-          path: dist.zip
+          name: apex_migrations-vsix
+          path: apex_migrations.vsix
+      
+      - name: Create ZIP with VSIX
+        run: |
+          zip apex_migrations.zip apex_migrations.vsix
 
       - name: Create GitHub Release
         id: create_release
@@ -45,7 +57,7 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Upload Release Asset
+      - name: Upload Release Asset Zip
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
@@ -53,4 +65,14 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: dist.zip
           asset_name: dist.zip
+          asset_content_type: application/zip
+      
+      - name: Upload Release Asset Zip
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          name: apex_migrations-zip
+          path: apex_migrations.zip
           asset_content_type: application/zip
