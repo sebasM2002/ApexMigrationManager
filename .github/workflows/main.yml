@@ -24,10 +24,6 @@ jobs:
       - name: Build project
         run: npm run compile
 
-      - name: Create dist ZIP
-        run: |
-          zip -r dist.zip dist
-
       - name: Install vsce
         run: npm install -g @vscode/vsce
 
@@ -60,16 +56,6 @@ jobs:
           release_name: Release v${{ steps.get_version.outputs.version }}
           draft: false
           prerelease: false
-
-      - name: Upload Release Asset Zip
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist.zip
-          asset_name: dist.zip
-          asset_content_type: application/zip
       
       - name: Upload Release Asset Zip
         uses: actions/upload-release-asset@v1
