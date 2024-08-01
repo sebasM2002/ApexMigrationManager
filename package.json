@@ -2,7 +2,8 @@
   "name": "apexmigrationmanager",
   "displayName": "ApexMigrationManager",
   "description": "Extension para crear migraciones de aplicaciones Apex utilizando Liquidbase",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "publisher": "SIT-Operativa",
   "engines": {
     "vscode": "^1.91.0"
   },
