@@ -63,6 +63,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          name: apex_migrations-zip
-          path: apex_migrations.zip
+          asset_name: apex_migrations.zip
+          asset_path: apex_migrations.zip
           asset_content_type: application/zip
