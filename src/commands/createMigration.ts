@@ -19,7 +19,7 @@ export async function createMigration() {
         prompt: 'Enter the Axosoft case number',
         placeHolder: 'Axosoft Case Number'
     });
-    //Revisar Caso Axosoft Numero
+    //Revisar Caso Axosoft Numeross
     if (!axosoftCaseNumber) {
         vscode.window.showErrorMessage('Axosoft case number is required.');
         return;
